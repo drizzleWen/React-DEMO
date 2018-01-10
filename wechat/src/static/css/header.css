@@ -1,0 +1,15 @@
+.ant-layout-header{
+	background-color: #e50012;
+	color: #fff;
+	text-align: center;
+	height: .8rem;
+	line-height: .8rem;
+	position: relative;
+}
+
+.ant-layout-header .anticon-left{
+	position: absolute;
+	left: .4rem;
+	top: .14rem;
+	font-size: .5rem;
+}

@@ -1,0 +1,99 @@
+body{
+	font-size: .26rem;
+	background-color: RGB(241,241,241);
+}
+
+.ant-layout .ant-layout-header{
+	background-color: #e50012;
+	color: #fff;
+	text-align: center;
+	height: .8rem;
+	line-height: .8rem;
+	position: relative;
+}
+
+.ant-layout .ant-layout-header .anticon-left{
+	position: absolute;
+	left: .4rem;
+	top: .14rem;
+	font-size: .5rem;
+}
+
+.ant-layout-content {
+	height: 1.8rem;
+	background-color: rgb(241,241,241);
+}
+
+.ant-layout-content div{
+	float: left;
+}
+
+.ant-layout-content .memberImg{
+	height: 1.4rem;
+	width: 1.4rem;
+	margin: .2rem;
+}
+
+.ant-layout-content .memberNum{
+	margin-top: .5rem;
+}
+
+.ant-layout-content .memberNum span{
+	display: block;
+}
+
+.ant-layout-content .memberNum span:nth-of-type(1){
+	font-weight: bold;
+}
+
+.ant-layout-content .memberInfo {
+	float: right;
+	margin-right: .4rem;
+	line-height: 1.8rem;
+}
+
+.integral,.store,.industry,.detail{
+	height: .6rem;
+	line-height: .6rem;
+}
+
+.integral,.industry,.detail{
+	border-bottom: 1px solid RGB(228,228,228);
+}
+
+.industry,.detail{
+	padding-left: .58rem;
+	padding-right: .58rem;
+}
+
+.store{
+	margin-bottom: .1rem;
+}
+
+.integralIcon,.storeIcon,.industryIcon,.detailIcon{
+	height: .6rem;
+	width: .6rem;
+	float: left;
+	background: url('../images/user_home.png') no-repeat;
+	background-size: 3rem;
+}
+
+.integralNum{
+	float: right;
+	color: #e50012;
+	font-weight: bold;
+}
+
+.integral span:nth-of-type(2),.store span:nth-of-type(2),.industry span:nth-of-type(2),.detail span:nth-of-type(2){
+	font-weight: bold;
+}
+
+.store span:nth-of-type(3){
+	float: right;
+	color: #ccc;
+}
+
+.industry i,.detail i{
+	float: right;
+	margin-top:.16rem;
+}
