@@ -2,9 +2,17 @@ import React, {
 	Component
 } from 'react';
 
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom';
+
 import '../static/js/rem';
 import '../static/css/home.css';
 import HeaderWX from './header.js';
+import Login from './login.js';
+import Personage from './personage.js';
 import {
 	Layout,
 	Icon,
@@ -17,12 +25,47 @@ const {
 	Content
 } = Layout;
 
+
+const routes = [{
+	path: '/',
+	component: Home
+}, {
+	path: '/login',
+	component: Login
+}, {
+	path: '/personage',
+	component: Personage
+}]
+
+// const Home = () => {
+// 	<Router>
+// 		<div>
+// 			<ul>
+// 				<li><Link to='/'></Link></li>
+// 				<li><Link to='/login'></Link></li>
+// 				<li><Link to='/personage'></Link></li>				
+// 			</ul>
+// 			<hr/>
+// 			<Route exact path='/' component={Home}/>
+// 			<Route path='/login' component={Login}/>
+// 			<Route path='/personage' component={Personage}/>
+// 		</div>
+// 	</Router>
+// }
+
+const RouteWithSubRoutes = (route) => (
+<Route path={route.path} render={props=>(<route.component {...props} routes={route.routes}/>)
+}
+/>
+)
+
 class Home extends Component {
 	constructor(props) {
 		super(props);
 	}
 	render() {
 		return (
+			<Router>
 			<div>
 				<Layout>
 					<HeaderWX name="个人中心"/>
@@ -38,10 +81,12 @@ class Home extends Component {
 							<span>drizzle</span>
 							<span>会员号：12345678901</span>
 						</div>
-						<div className="memberInfo">
-							个人资料
-							<Icon type="right"/>
-						</div>
+						<Link to="/personage">
+		<div className="memberInfo">
+								个人资料
+								<Icon type="right"/>
+							</div>
+						</Link>
 					</Content>
 						<Row style={{backgroundColor:"#fff"}}>
 							<Col span={20} offset={2} >
@@ -55,7 +100,7 @@ class Home extends Component {
 									<span>积分商城</span>
 									<span>一大波好礼等你兑换</span>
 								</div>
-							
+
 							</Col>
 						</Row>
 						<Row style={{backgroundColor:"#fff",marginTop:".1rem"}}>
@@ -73,7 +118,12 @@ class Home extends Component {
 							</Col>
 						</Row>
 				</Layout>
-			</div>
+
+				{routes.map((route,i)=>(
+					<RouteWithSubRoutes key={i} {...route}/>
+					))}
+				</div>
+			</Router>
 		)
 	}
 }

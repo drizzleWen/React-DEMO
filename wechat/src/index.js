@@ -9,5 +9,5 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 
-ReactDOM.render(<Personage />, document.getElementById('root'));
+ReactDOM.render(<Home />, document.getElementById('root'));
 registerServiceWorker();

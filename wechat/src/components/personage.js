@@ -29,7 +29,8 @@ const styles = {
 		float: 'left',
 		borderRadius: '.3rem',
 		margin: '.1rem 0',
-		marginRight: '.2rem'
+		marginRight: '.2rem',
+		backgroundColor: 'rgb(241,241,241)'
 	},
 	itemChecked: {
 		padding: '.1rem .2rem',
@@ -61,26 +62,19 @@ const styles = {
 }
 
 const Option = Select.Option;
-
+const Business = ["新能源", "汽车电子&零部件", "半导体", "3C&家电", "一般工业", "建筑", "医疗&食品"]
+const Product = ["化学品", "个人防护", "安防", "搬运存储", "清洁工具", "金属加工", "紧固件", "气动液压", "工具", "仪器仪表", "流体控制", "电气"]
 class Personage extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			index: 0
-		}
 		this._HandClick = this._HandClick.bind(this);
 	}
-	_HandClick(index) {
-		this.setState({
-			index: this.state.index === index ? -1 : index
-		});
+	_HandClick(e) {
+		e.target.style.backgroundColor = e.target.style.backgroundColor == 'rgb(241, 241, 241)' ? 'rgb(239,168,172)' : 'rgb(241,241,241)'
 	}
 
 	render() {
-		const Business = ["新能源", "汽车电子&零部件", "半导体", "3C&家电", "一般工业", "建筑", "医疗&食品"]
-		const Product = ["化学品", "个人防护", "安防", "搬运存储", "清洁工具", "金属加工", "紧固件", "气动液压", "工具", "仪器仪表", "流体控制", "电气"]
-		const styleName = this.state.isChecked == true ? 'styles.itemChecked' : 'styles.item';
-		console.log(styleName);
+		let cssX = 'styles.item';
 		return (
 			<Layout>
 				<HeaderWX name="个人资料"/>
@@ -124,11 +118,13 @@ class Personage extends Component {
 									Business.map((name,index)=>
 										<li 
 											key={index} 
-											style={styles.item} 
-											onClick={(e)=>this._HandClick(index,e)}
-											className={classNames({active:index===this.state.index})}
+											style = {
+												styles.item
+											}
+											onClick={this._HandClick}
 										>
-										{name}</li>
+										{name}
+										</li>
 									)
 								}
 							</ul>
@@ -142,7 +138,7 @@ class Personage extends Component {
 							<ul className="productItem">
 								{
 									Product.map(name=>
-										<li key={name} style={styles.item}>{name}</li>
+										<li key={name} style={styles.item} onClick={this._HandClick}>{name}</li>
 									)
 
 								}
