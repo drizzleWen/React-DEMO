@@ -9,6 +9,10 @@ import {
 	Icon
 } from 'antd';
 
+import {
+	Link
+} from 'react-router-dom';
+
 const {
 	Header
 } = Layout;
@@ -22,9 +26,13 @@ class HeaderWX extends Component {
 	render() {
 		return (
 			<Header>
-		<Icon type="left" /> {
-			this.props.name
-		}
+				<Link to='/login'>
+					<Icon type="left" />
+				</Link>
+				 {
+					this.props.name
+				}
+				
 			</Header>
 		)
 	}

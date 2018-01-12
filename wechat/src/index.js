@@ -7,7 +7,20 @@ import HeaderWX from './components/header.js';
 import Personage from './components/personage.js';
 import registerServiceWorker from './registerServiceWorker';
 
+//路由
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom';
 
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+
+ReactDOM.render(
+	<Router>
+		<Home>
+			<Route path='login' component={Login} />
+			<Route path='personage' component={Personage}/>
+		</Home>		
+	</Router>, document.getElementById('root'));
 registerServiceWorker();

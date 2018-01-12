@@ -25,49 +25,13 @@ const {
 	Content
 } = Layout;
 
-
-const routes = [{
-	path: '/',
-	component: Home
-}, {
-	path: '/login',
-	component: Login
-}, {
-	path: '/personage',
-	component: Personage
-}]
-
-// const Home = () => {
-// 	<Router>
-// 		<div>
-// 			<ul>
-// 				<li><Link to='/'></Link></li>
-// 				<li><Link to='/login'></Link></li>
-// 				<li><Link to='/personage'></Link></li>				
-// 			</ul>
-// 			<hr/>
-// 			<Route exact path='/' component={Home}/>
-// 			<Route path='/login' component={Login}/>
-// 			<Route path='/personage' component={Personage}/>
-// 		</div>
-// 	</Router>
-// }
-
-const RouteWithSubRoutes = (route) => (
-<Route path={route.path} render={props=>(<route.component {...props} routes={route.routes}/>)
-}
-/>
-)
-
 class Home extends Component {
 	constructor(props) {
 		super(props);
 	}
 	render() {
 		return (
-			<Router>
-			<div>
-				<Layout>
+			<Layout>
 					<HeaderWX name="个人中心"/>
 					<Content>
 						<div>
@@ -81,8 +45,8 @@ class Home extends Component {
 							<span>drizzle</span>
 							<span>会员号：12345678901</span>
 						</div>
-						<Link to="/personage">
-		<div className="memberInfo">
+						<Link to='/persoange'>
+							<div className="memberInfo">
 								个人资料
 								<Icon type="right"/>
 							</div>
@@ -119,13 +83,11 @@ class Home extends Component {
 						</Row>
 				</Layout>
 
-				{routes.map((route,i)=>(
-					<RouteWithSubRoutes key={i} {...route}/>
-					))}
-				</div>
-			</Router>
+
 		)
 	}
 }
+
+
 
 export default Home;
