@@ -7,7 +7,8 @@ import {
 	Input,
 	Icon,
 	Row,
-	Col
+	Col,
+	Avatar
 } from 'antd';
 
 import '../static/js/rem';
@@ -34,25 +35,86 @@ class Login extends Component {
 		super(props);
 		this.state = {
 			userName: '',
+			CompanyName: '',
+			CodeName: '',
+			Time: '60',
+			TimeFlage: true
+
 		}
 	}
 
-	onChangeUserName = (e) => {
+	_HandChangeUsername(e) {
+		let userName = e.target.value;
 		this.setState({
-			userName: ''
-		})
+			userName: userName
+		});
+	}
+
+	_HandChangeCompany(e) {
+		let CompanyName = e.target.value;
+		this.setState({
+			CompanyName: CompanyName
+		});
+	}
+
+	_HandChangeCode(e) {
+		let CodeName = e.target.value;
+		this.setState({
+			CodeName: CodeName
+		});
+	}
+
+	_onSubmit() {
+		if (!this.state.userName) {
+			alert("请填写手机号")
+		} else if (!this.state.CompanyName) {
+			alert("请填写公司名")
+		} else if (!this.state.CodeName) {
+			alert("请填写验证码")
+		} else {
+			window.location.href = '/'
+		}
+
+	}
+	_HandleClick(e) {
+		if (this.state.TimeFlage) {
+			this.timer = setInterval((e) => {
+				let count = this.state.Time;
+				this.state.TimeFlage = false;
+				count -= 1;
+				if (count < 1) {
+					this.setState({
+						TimeFlage: true
+					})
+					count = 60;
+					clearInterval(this.timer);
+				}
+				this.setState({
+					Time: count
+				});
+			}, 1000)
+
+		}
 	}
 	render() {
 		const {
-			userName
+			userName,
+			CompanyName,
+			CodeName
 		} = this.state;
 		const suffix = userName ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
+		const text = this.state.TimeFlage ? '获取验证码' :
+			this.state.Time + '秒后重发'
 		return (
 			<div className="login">
 			<Row>
 				<Col span={18} offset={3}>
 				 	<div className="userImg" style={styles.userImg}>
-				 		<img src='../static/images/favicon.ico' />
+				 		<Avatar
+		src = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+		shape = "square"
+		className = "memberImg"
+							/>
 				 	</div>
 				 	<div className="loginFrom">
 				 		<ul>
@@ -62,7 +124,9 @@ class Login extends Component {
 				 				maxLength="11"
 				 				value={userName}
 				 				suffix={this.suffix}
-				 				onChange={this.onChangeUserName}
+								onChange = {
+									this._HandChangeUsername.bind(this)
+								}
 				 				ref={node=>this.userNameInput=node}
 				 				/>
 				 			</li>
@@ -70,6 +134,10 @@ class Login extends Component {
 				 				<Input
 				 				placeholder="请输入您公司的全称"
 				 				addonBefore="公司名"
+					 			onChange = {
+										this._HandChangeCompany.bind(this)
+									}
+				 				value={CompanyName}
 				 				/>
 				 			</li>
 				 			<li className="authCode">
@@ -77,11 +145,17 @@ class Login extends Component {
 								placeholder="请输入短信验证码"
 								addonBefore="验证码"
 								maxLength="4"
+								onChange = {
+									this._HandChangeCode.bind(this)
+								}
+								value={CodeName}
 								/>
-								<Button style={styles.codeBth}>获取验证码</Button>
+								<Button style={styles.codeBth}
+								onClick={this._HandleClick.bind(this)}
+								>{text}</Button>
 				 			</li>
 				 		</ul>
-				 		<Button className="submitBtn">注册并登录</Button>
+				 		<Button className="submitBtn" onClick={this._onSubmit.bind(this)}>注册并登录</Button>
 				 	</div>
 				 	</Col>
 			 	</Row>	

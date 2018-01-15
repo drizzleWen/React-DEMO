@@ -21,14 +21,24 @@ const {
 class HeaderWX extends Component {
 	constructor(props) {
 		super(props);
+		this._goBack = this._goBack.bind(this);
+	}
+
+	_goBack() {
+		if (window.history.length > 0) {
+			window.history.go(-1);
+		} else {
+			window.location.href = '/login';
+		}
+
 	}
 
 	render() {
 		return (
-			<Header>
-				<Link to='/login'>
+			<Header onClick={this._goBack}>
+				
 					<Icon type="left" />
-				</Link>
+		
 				 {
 					this.props.name
 				}

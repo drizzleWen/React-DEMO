@@ -19,7 +19,6 @@ import {
 	Row,
 	Col,
 	Avatar
-
 } from 'antd';
 const {
 	Content
@@ -45,7 +44,7 @@ class Home extends Component {
 							<span>drizzle</span>
 							<span>会员号：12345678901</span>
 						</div>
-						<Link to='/persoange'>
+						<Link to='/personage'>
 							<div className="memberInfo">
 								个人资料
 								<Icon type="right"/>

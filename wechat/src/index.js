@@ -18,9 +18,10 @@ import {
 
 ReactDOM.render(
 	<Router>
-		<Home>
-			<Route path='login' component={Login} />
-			<Route path='personage' component={Personage}/>
-		</Home>		
+		<div>
+			<Route path='/' component={Home} exact />
+			<Route path='/login' component={Login} />
+			<Route path='/personage' component={Personage}/>
+		</div>		
 	</Router>, document.getElementById('root'));
 registerServiceWorker();

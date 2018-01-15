@@ -12,7 +12,6 @@ import {
 	Select,
 	Layout,
 	Avatar,
-	Icon,
 	Button,
 	Row,
 	Col
