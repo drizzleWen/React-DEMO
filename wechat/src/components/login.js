@@ -8,11 +8,14 @@ import {
 	Icon,
 	Row,
 	Col,
-	Avatar
+	Avatar,
+	Modal
 } from 'antd';
 
 import '../static/js/rem';
 import '../static/css/login.css';
+
+const confirm = Modal.confirm;
 
 const styles = {
 	userImg: {
@@ -38,16 +41,35 @@ class Login extends Component {
 			CompanyName: '',
 			CodeName: '',
 			Time: '60',
-			TimeFlage: true
-
+			TimeFlage: true,
+			title: '',
+			content: ''
 		}
 	}
 
 	_HandChangeUsername(e) {
 		let userName = e.target.value;
-		this.setState({
-			userName: userName
-		});
+		if (!isNaN(userName)) {
+			this.setState({
+				userName: userName
+			})
+		}
+	}
+
+	_HandleBlurUserName(e) {
+		let username = e.target.value;
+		const reg = /^(0|86|17951)?[1][3,4,5,7,8][0-9]{9}$/;
+		if (!reg.test(username)) {
+			this.setState({
+				title: '请输入手机号码',
+				content: '您输入的手机号码有点问题哦'
+			}, () => this._InfoError())
+		} else {
+			this.setState({
+				title: '',
+				content: ''
+			})
+		}
 	}
 
 	_HandChangeCompany(e) {
@@ -59,18 +81,30 @@ class Login extends Component {
 
 	_HandChangeCode(e) {
 		let CodeName = e.target.value;
-		this.setState({
-			CodeName: CodeName
-		});
+		if (!isNaN(CodeName)) {
+			this.setState({
+				CodeName: CodeName
+			})
+		}
+
 	}
 
 	_onSubmit() {
 		if (!this.state.userName) {
-			alert("请填写手机号")
+			this.setState({
+				title: '请输入手机号码',
+				content: '您还没有输入手机号哦'
+			}, () => this._InfoError());
 		} else if (!this.state.CompanyName) {
-			alert("请填写公司名")
+			this.setState({
+				title: '请输入公司名',
+				content: '您还没有输入公司名哦'
+			}, () => this._InfoError());
 		} else if (!this.state.CodeName) {
-			alert("请填写验证码")
+			this.setState({
+				title: '请输入验证码',
+				content: '您还没有输入验证码哦'
+			}, () => this._InfoError());
 		} else {
 			window.location.href = '/'
 		}
@@ -95,6 +129,13 @@ class Login extends Component {
 			}, 1000)
 
 		}
+	}
+
+	_InfoError() {
+		Modal.error({
+			title: this.state.title,
+			content: this.state.content
+		})
 	}
 	render() {
 		const {
@@ -126,6 +167,9 @@ class Login extends Component {
 				 				suffix={this.suffix}
 								onChange = {
 									this._HandChangeUsername.bind(this)
+								}
+								onBlur={
+									this._HandleBlurUserName.bind(this)
 								}
 				 				ref={node=>this.userNameInput=node}
 				 				/>
